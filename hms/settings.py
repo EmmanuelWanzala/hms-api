@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hmsapp.apps.HmsappConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
