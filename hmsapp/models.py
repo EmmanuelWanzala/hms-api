@@ -67,7 +67,21 @@ class Case(models.Model):
     def __str__(self):
         return f'{self.case_title}:{self.patient_id}:{self.diagnosis}'        
 
+class Bill(models.Model):
+    """
+    Bill class to define bill Objects
+    """
+    
+    case = models.ForeignKey(Case, on_delete=models.CASCADE)
+    service_fee =   models.PositiveIntegerField(default=0)
+    medication_fee = models.PositiveIntegerField(default=0)
+    doc_fee = models.PositiveIntegerField()
+    total_amount = models.PositiveIntegerField()
+    is_paid = models.BooleanField(default=False)
+    bill_date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+    	return f'{self.case.case_title}:{self.total_amount}:{self.is_paid}'  
 
 
 
