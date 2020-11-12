@@ -49,6 +49,25 @@ class Service(models.Model):
     def __str__(self):
         return self.service_name        
 
+class Case(models.Model): 
+    """
+    Case class to define case Objects
+    """
+    patient = models.ForeignKey(User,  on_delete=models.CASCADE, related_name='case_patient')
+    doctor = models.ForeignKey(User,  on_delete=models.CASCADE, related_name='case_doctor')
+    case_title = models.CharField(max_length =150)
+    diagnosis = models.TextField()
+    medication = models.ForeignKey(Medication, on_delete=models.CASCADE,null=True)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE,null=True)
+    admission = models.BooleanField(default=False)
+    case_date = models.DateTimeField(auto_now_add=True)
+
+   
+
+    def __str__(self):
+        return f'{self.case_title}:{self.patient_id}:{self.diagnosis}'        
+
+
 
 
 
