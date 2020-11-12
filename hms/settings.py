@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hmsapp.apps.HmsappConfig',
     'rest_framework',
+    'users'
 ]
 
 MIDDLEWARE = [
