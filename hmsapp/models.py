@@ -36,6 +36,23 @@ class Medication(models.Model):
 
 
 
+class Service(models.Model): 
+    """
+    Service class to define service Objects
+    """
+  
+    service_name = models.CharField(max_length =100)
+    service_cost = models.PositiveIntegerField()
+    service_description = models.TextField()
+
+
+    def __str__(self):
+        return self.service_name        
+
+
+
+
+
 
     
 
