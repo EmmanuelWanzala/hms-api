@@ -19,6 +19,19 @@ class Appointment(models.Model):
         return self.app_title
 
 
+class Medication(models.Model): 
+    """
+    Medication class to define medication Objects
+    """
+  
+    med_name = models.CharField(max_length =100)
+    med_cost_price = models.PositiveIntegerField()
+    med_manufacture = models.CharField(max_length =100)
+    med_description = models.TextField()
+
+
+    def __str__(self):
+        return self.med_name
 
 
 
