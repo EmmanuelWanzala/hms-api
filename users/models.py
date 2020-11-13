@@ -51,3 +51,13 @@ class Doctor(models.Model):
         return "{} ({})".format(self.user.first_name,self.department)
 
 
+class Patient(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    contact_no = models.IntegerField()
+    address = models.CharField(max_length=200)
+    age = models.PositiveIntegerField()
+    blood_group = models.CharField(max_length=3,null=True,blank=True)
+
+    def __str__(self):
+        return "{} ({}:{})".format(self.user.first_name,self.user.get_role_display(),self.age)
+
