@@ -8,16 +8,16 @@ from .models import CustomUser,Doctor,Patient
 class CustomUserAdmin(UserAdmin):
     
     model = CustomUser
-    list_display = ('email','role','first_name','last_name','is_staff', 'is_active',)
+    list_display = ('email','role','first_name','last_name','address','mobile','is_staff', 'is_active',)
     list_filter = ('email','role')
     fieldsets = (
-        (None, {'fields': ('email','role','first_name','last_name', 'password')}),
+        (None, {'fields': ('email','role','first_name','last_name','address','mobile', 'password')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email','role','first_name','last_name', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('email','role','first_name','last_name','address','mobile', 'password1', 'password2', 'is_staff', 'is_active')}
         ),
     )
     search_fields = ('email',)

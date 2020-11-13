@@ -21,7 +21,11 @@ class CustomUser(AbstractUser):
 
     username = None
     email = models.EmailField(('email address'), unique=True)
+    first_name=models.CharField(('first name'), max_length=30, blank=False)
+    last_name=models.CharField(('last name'), max_length=30, blank=False)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES)
+    address = models.CharField(max_length=200,null=True)
+    mobile = models.CharField(max_length=20,null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -43,8 +47,6 @@ departments=[('Consultant','Consultant'),
 ]
 class Doctor(models.Model):
     user=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-    address = models.CharField(max_length=40)
-    mobile = models.CharField(max_length=20,null=True)
     department= models.CharField(max_length=50,choices=departments,default='Consultant')
  
     def __str__(self):
@@ -53,8 +55,6 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    contact_no = models.IntegerField()
-    address = models.CharField(max_length=200)
     age = models.PositiveIntegerField()
     blood_group = models.CharField(max_length=3,null=True,blank=True)
 
