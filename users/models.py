@@ -21,6 +21,7 @@ class CustomUser(AbstractUser):
 
     username = None
     email = models.EmailField(('email address'), unique=True)
+    is_active=models.BooleanField(default=False)
     first_name=models.CharField(('first name'), max_length=30, blank=False)
     last_name=models.CharField(('last name'), max_length=30, blank=False)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES)
@@ -55,7 +56,7 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(null=True,blank=True)
     blood_group = models.CharField(max_length=3,null=True,blank=True)
 
     def __str__(self):
