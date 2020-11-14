@@ -6,17 +6,41 @@ from django.template.loader import render_to_string
 from .token_generator import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from hms.settings import DOMAIN
+from hms.settings import DOMAIN,SENDGRID_API_KEY
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+
+
+
+
+
+
 
 def send_confirmation_email(user):
-    email_subject = 'Activate Your Account'
-    message = render_to_string('activate_account.html', {
+
+    # locates our email.html in the templates folder
+    msg_html = render_to_string('activate_account.html',{
         'user': user,
         'domain': DOMAIN,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
     })
-    to_email = user.email
-    email = EmailMessage(email_subject, message, to=[to_email])
-    email.send()
-    return HttpResponse('We have sent you an email, please confirm your email address to complete registration')
+    message = Mail(
+        # the email that sends the confirmation email
+        from_email='dennismuriithik@gmail.com',
+        to_emails=[user.email],  # list of email receivers
+        subject='Account activation',  # subject of your email
+        html_content=msg_html)
+    try:
+        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        response = sg.send(message)
+        print(response.status_code)
+    except Exception as e:
+        print(e.message)
+        return str(e)
+
+
+
+
+
