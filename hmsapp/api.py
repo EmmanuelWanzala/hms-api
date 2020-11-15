@@ -50,6 +50,23 @@ class PatientCaseList(generics.ListAPIView):
         if patid is not None:
             queryset = queryset.filter(patient_id=patid)
    
-        return queryset             
+        return queryset 
+  
+  
+class AppointmentCreateApi(generics.CreateAPIView):
+    queryset= Appointment.objects.all()
+    serializer_class=AppointmentSerializer
 
+class AppointmentApi(generics.ListAPIView):
+    queryset=Appointment.objects.all()
+    serializer_class=AppointmentSerializer
+
+class AppointmentUpdateApi(generics.RetrieveUpdateAPIView):
+    queryset=Appointment.objects.all()
+    serializer_class=AppointmentSerializer
+
+class AppointmentDeleteApi(generics.DestroyAPIView):
+    queryset=Appointment.objects.all()
+    serializer_class=AppointmentSerializer
         
+

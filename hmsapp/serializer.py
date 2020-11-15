@@ -1,6 +1,7 @@
 from rest_framework import  serializers
-from .models import Case
+from .models import Case,Appointment
 from users.models import CustomUser as User
+from django.db.models import fields
 
 
 
@@ -23,6 +24,11 @@ class CaseSerializer(serializers.ModelSerializer):
         fields = '__all__'        
 
 
+        
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+      model=Appointment
+      fields='__all__'
+        
 
-  
 
