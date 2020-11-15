@@ -102,3 +102,30 @@ class PatientAppointmentList(generics.ListAPIView):
       
         
 
+class BillApi(generics.ListAPIView):
+    queryset=Bill.objects.all()
+    serializer_class=BillListSerializer
+
+class BillUpdateApi(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Bill.objects.all()
+    serializer_class=BillSerializer
+
+
+
+class PatientBillList(generics.ListAPIView):
+    
+    serializer_class = BillListSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the bills
+        for the patient.
+        """
+        queryset = Bill.objects.all()
+        patid = self.kwargs['patid']
+        if patid is not None:
+            queryset = queryset.filter(case__patient_id=patid)
+   
+        return queryset  
+
+
