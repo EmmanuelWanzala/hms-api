@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import CustomUser as User
 import datetime as dt
 
 
@@ -57,9 +57,10 @@ class Case(models.Model):
     doctor = models.ForeignKey(User,  on_delete=models.CASCADE, related_name='case_doctor')
     case_title = models.CharField(max_length =150)
     diagnosis = models.TextField()
-    medication = models.ForeignKey(Medication, on_delete=models.CASCADE,null=True)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE,null=True)
-    admission = models.BooleanField(default=False)
+    medication = models.ForeignKey(Medication, on_delete=models.CASCADE,null=True,blank=True)
+    medication_quantity=models.PositiveIntegerField(default=0)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE,null=True,blank=True)
+    admission_days = models.PositiveIntegerField(default=0)
     case_date = models.DateTimeField(auto_now_add=True)
 
    
