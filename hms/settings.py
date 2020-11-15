@@ -17,7 +17,7 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SENDGRID_API_KEY = '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'
+SENDGRID_API_KEY =config('SENDGRID_KEY')
 
 DOMAIN= config('DOMAIN')
 # Quick-start development settings - unsuitable for production
