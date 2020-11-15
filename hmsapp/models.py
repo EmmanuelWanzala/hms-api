@@ -73,7 +73,8 @@ class Bill(models.Model):
     Bill class to define bill Objects
     """
     
-    case = models.ForeignKey(Case, on_delete=models.CASCADE)
+    case = models.OneToOneField(Case, on_delete=models.CASCADE)
+    admission_fee = models.PositiveIntegerField(default=0)
     service_fee =   models.PositiveIntegerField(default=0)
     medication_fee = models.PositiveIntegerField(default=0)
     doc_fee = models.PositiveIntegerField()

@@ -59,14 +59,73 @@ class AppointmentCreateApi(generics.CreateAPIView):
 
 class AppointmentApi(generics.ListAPIView):
     queryset=Appointment.objects.all()
-    serializer_class=AppointmentSerializer
+    serializer_class=AppointmentListSerializer
 
-class AppointmentUpdateApi(generics.RetrieveUpdateAPIView):
+class AppointmentUpdateApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Appointment.objects.all()
     serializer_class=AppointmentSerializer
 
-class AppointmentDeleteApi(generics.DestroyAPIView):
-    queryset=Appointment.objects.all()
-    serializer_class=AppointmentSerializer
+
+
+class DoctorAppointmentList(generics.ListAPIView):
+    
+    serializer_class = AppointmentListSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the Appointments
+        for the doctor.
+        """
+        queryset = Appointment.objects.all()
+        docid = self.kwargs['docid']
+        if docid is not None:
+            queryset = queryset.filter(doctor_id=docid)
+   
+        return queryset  
+
+
+class PatientAppointmentList(generics.ListAPIView):
+    
+    serializer_class = AppointmentListSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the Appointments
+        for the patient.
+        """
+        queryset = Appointment.objects.all()
+        patid = self.kwargs['patid']
+        if patid is not None:
+            queryset = queryset.filter(patient_id=patid)
+   
+        return queryset 
+      
         
+
+class BillApi(generics.ListAPIView):
+    queryset=Bill.objects.all()
+    serializer_class=BillListSerializer
+
+class BillUpdateApi(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Bill.objects.all()
+    serializer_class=BillSerializer
+
+
+
+class PatientBillList(generics.ListAPIView):
+    
+    serializer_class = BillListSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the bills
+        for the patient.
+        """
+        queryset = Bill.objects.all()
+        patid = self.kwargs['patid']
+        if patid is not None:
+            queryset = queryset.filter(case__patient_id=patid)
+   
+        return queryset  
+
 

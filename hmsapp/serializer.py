@@ -1,5 +1,5 @@
 from rest_framework import  serializers
-from .models import Case,Appointment
+from .models import Case,Appointment,Bill
 from users.models import CustomUser as User
 from django.db.models import fields
 
@@ -29,6 +29,29 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
       model=Appointment
       fields='__all__'
+
+
+class AppointmentListSerializer(serializers.ModelSerializer):
+    patient = UserSerializer(read_only=True, many=False)
+    doctor = UserSerializer(read_only=True, many=False)
+    class Meta:
+        model = Appointment
+        fields = '__all__'      
+
+
+
+class BillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bill
+        fields = '__all__'  
+
+
+class BillListSerializer(serializers.ModelSerializer):
+    case = CaseListSerializer(read_only=True, many=False)
+    class Meta:
+        model = Bill
+        fields = '__all__'      
+                
         
 
 
