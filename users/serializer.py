@@ -40,8 +40,6 @@ class UserLoginSerializer(serializers.Serializer):
 
         if user is None:
             raise serializers.ValidationError("Invalid login credentials")
-        elif user and not user.is_active:
-            raise serializers.ValidationError("Verify your email address to login")
 
         try:
             refresh = RefreshToken.for_user(user)
