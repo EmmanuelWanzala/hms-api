@@ -29,6 +29,14 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
       model=Appointment
       fields='__all__'
+
+
+class AppointmentListSerializer(serializers.ModelSerializer):
+    patient = UserSerializer(read_only=True, many=False)
+    doctor = UserSerializer(read_only=True, many=False)
+    class Meta:
+        model = Appointment
+        fields = '__all__'      
         
 
 

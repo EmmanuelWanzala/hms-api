@@ -9,9 +9,9 @@ urlpatterns = [
     path('api/cases/doctor/<int:docid>',DoctorCaseList.as_view()),#view all doctor cases
     path('api/cases/patient/<int:patid>',PatientCaseList.as_view()),#view all patient cases
     path('api/appointment/create',AppointmentCreateApi.as_view()),
-    path('api/appointment',AppointmentApi.as_view()),
+    path('api/appointments',AppointmentApi.as_view()),
     path('api/appointment/<int:pk>',AppointmentUpdateApi.as_view()),
-    path('api/appointment/<int:pk>',AppointmentDeleteApi.as_view()),
-
+    path('api/appointments/doctor/<int:docid>',DoctorAppointmentList.as_view()),#view all doctor cases
+    path('api/appointments/patient/<int:patid>',PatientAppointmentList.as_view()),#view all patient cases
 ]
 
