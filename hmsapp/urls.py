@@ -17,6 +17,18 @@ urlpatterns = [
     
     path('api/bills',BillApi.as_view()),#view all bills
     path('api/bill/<int:pk>',BillUpdateApi.as_view()),#update,view or delete bill
-    path('api/bills/patient/<int:patid>',PatientBillList.as_view())#view all bills by patient
+    path('api/bills/patient/<int:patid>',PatientBillList.as_view()),#view all bills by pa
+    
+    path('api/medication/create',MedicationCreateApi.as_view()),
+    path('api/medication',MedicationApi.as_view()),
+    path('api/medication/<int:pk>',MedicationUpdateApi.as_view()),
+    path('api/medication/<int:pk>/delete',MedicationDeleteApi.as_view()),
+
+    path('api/service/create',ServiceCreateApi.as_view()),
+    path('api/service',ServiceApi.as_view()),
+    path('api/service/<int:pk>',ServiceUpdateApi.as_view()),
+    path('api/service/<int:pk>/delete',ServiceDeleteApi.as_view()),    
+    
+
 ]
 
