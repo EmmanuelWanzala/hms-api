@@ -4,16 +4,13 @@ from .models import *
 from .serializer import *
 # Create your views here.
 
-
 class CaseCreateView(generics.CreateAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
 
-
 class CaseListView(generics.ListAPIView):
     queryset = Case.objects.all()
     serializer_class = CaseListSerializer
-
 
 class CaseView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CaseSerializer
@@ -52,7 +49,7 @@ class PatientCaseList(generics.ListAPIView):
    
         return queryset 
   
-  
+ 
 class AppointmentCreateApi(generics.CreateAPIView):
     queryset= Appointment.objects.all()
     serializer_class=AppointmentSerializer
@@ -64,8 +61,6 @@ class AppointmentApi(generics.ListAPIView):
 class AppointmentUpdateApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Appointment.objects.all()
     serializer_class=AppointmentSerializer
-
-
 
 class DoctorAppointmentList(generics.ListAPIView):
     
@@ -100,8 +95,6 @@ class PatientAppointmentList(generics.ListAPIView):
    
         return queryset 
       
-        
-
 class BillApi(generics.ListAPIView):
     queryset=Bill.objects.all()
     serializer_class=BillListSerializer
@@ -109,8 +102,6 @@ class BillApi(generics.ListAPIView):
 class BillUpdateApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Bill.objects.all()
     serializer_class=BillSerializer
-
-
 
 class PatientBillList(generics.ListAPIView):
     
@@ -128,4 +119,34 @@ class PatientBillList(generics.ListAPIView):
    
         return queryset  
 
+class MedicationCreateApi(generics.CreateAPIView):
+    queryset=Medication.objects.all()
+    serializer_class=MedicationSerializer
 
+class MedicationApi(generics.ListAPIView):
+    queryset=Medication.objects.all()
+    serializer_class=MedicationSerializer
+
+class MedicationUpdateApi(generics.RetrieveAPIView):
+    queryset=Medication.objects.all()
+    serializer_class=MedicationSerializer
+
+class MedicationDeleteApi(generics.DestroyAPIView):
+    queryset=Medication.objects.all()
+    serializer_class=MedicationSerializer
+
+class ServiceCreateApi(generics.CreateAPIView):
+    queryset=Service.objects.all()
+    serializer_class=ServiceSerializer
+
+class ServiceApi(generics.ListAPIView):
+    queryset=Service.objects.all()
+    serializer_class=ServiceSerializer
+
+class ServiceUpdateApi(generics.RetrieveAPIView):
+    queryset=Service.objects.all()
+    serializer_class=ServiceSerializer
+
+class ServiceDeleteApi(generics.DestroyAPIView):
+    queryset=Service.objects.all()
+    serializer_class=ServiceSerializer
