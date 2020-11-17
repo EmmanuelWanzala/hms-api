@@ -31,12 +31,14 @@ class CustomUserManager(BaseUserManager):
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_verified', True)
         role=1
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
+        if extra_fields.get('is_verified') is not True:
+            raise ValueError(_('Superuser must have is_verified=True.'))    
    
         return self.create_user(email, password,role, '','',**extra_fields)

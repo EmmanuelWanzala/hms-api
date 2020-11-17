@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
+from rest_framework.exceptions import AuthenticationFailed
 
 # Register serializer
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -26,6 +27,7 @@ class UserLoginSerializer(serializers.Serializer):
     access = serializers.CharField(read_only=True)
     refresh = serializers.CharField(read_only=True)
     role = serializers.CharField(read_only=True)
+    is_verified = serializers.BooleanField(read_only=True)
 
     def create(self, validated_date):
         pass
@@ -40,6 +42,8 @@ class UserLoginSerializer(serializers.Serializer):
 
         if user is None:
             raise serializers.ValidationError("Invalid login credentials")
+        if not user.is_verified:
+            raise AuthenticationFailed('Email Not Verified')    
 
         try:
             refresh = RefreshToken.for_user(user)

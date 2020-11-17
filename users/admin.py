@@ -8,7 +8,7 @@ from .models import CustomUser,Doctor,Patient
 class CustomUserAdmin(UserAdmin):
     
     model = CustomUser
-    list_display = ('email','role','first_name','last_name','address','mobile','is_staff', 'is_active',)
+    list_display = ('email','role','first_name','last_name','address','mobile','is_staff','is_verified', 'is_active',)
     list_filter = ('email','role')
     fieldsets = (
         (None, {'fields': ('email','role','first_name','last_name','address','mobile', 'password')}),
@@ -17,7 +17,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email','role','first_name','last_name','address','mobile', 'password1', 'password2', 'is_staff', 'is_active')}
+            'fields': ('email','role','first_name','last_name','address','mobile', 'password1', 'password2', 'is_staff', 'is_active','is_verified')}
         ),
     )
     search_fields = ('email',)

@@ -21,7 +21,8 @@ class CustomUser(AbstractUser):
 
     username = None
     email = models.EmailField(('email address'), unique=True)
-    is_active=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=True)
+    is_verified=models.BooleanField(default=False)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES)
     address = models.CharField(max_length=200,blank=True,null=True)
     mobile = models.CharField(max_length=20,blank=True,null=True)
