@@ -27,7 +27,7 @@ class RegisterApi(generics.GenericAPIView):
             response = {
                 'success': True,
                 'statusCode': status_code,
-                'message': 'User successfully registered!',
+                'message': 'User successfully registered.Verify email address to activate account!',
                 'user': serializer.data
             }
 
