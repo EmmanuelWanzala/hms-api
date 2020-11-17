@@ -20,6 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SENDGRID_API_KEY =config('SENDGRID_KEY')
 
 DOMAIN= config('DOMAIN')
+
+UIDOMAIN= config('UIDOMAIN')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 

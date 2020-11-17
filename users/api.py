@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .token_generator import account_activation_token
 from .serializer import UserRegistrationSerializer,UserLoginSerializer
 from .models import CustomUser as User
-
+from hms.settings import UIDOMAIN
 
 #Register API
 class RegisterApi(generics.GenericAPIView):
@@ -46,6 +46,8 @@ def activate_account(request, uidb64, token):
         login(request, user)
         context={
         'success':True,
+        'user':user,
+        'domain':UIDOMAIN,
         'status':'success',
         'message':'Your account has been activated successfully',
         }

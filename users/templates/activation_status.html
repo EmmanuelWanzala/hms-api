@@ -22,7 +22,16 @@
         <div class="alert alert-{{ status}}" role="alert">
           <p>{{ message }}</p>
           {%if success%}
-          <button type="button" class="btn btn-sm btn-primary">LOGIN</button>
+          {%ifequal user.role 2%}
+          <a href="{{domain}}/doctor/login">
+            <button type="button" class="btn btn-sm btn-primary">LOGIN</button>
+          </a>
+          {%else%}
+          <a href="{{domain}}/patient/login">
+            <button type="button" class="btn btn-sm btn-primary">LOGIN</button>
+          </a>
+          {%endifequal%}
+          
           {%endif%}
         </div>
   </div>
