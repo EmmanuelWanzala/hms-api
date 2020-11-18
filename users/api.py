@@ -96,18 +96,6 @@ class DoctorListView(generics.ListAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DocSerializer
 
-# class DoctorView(generics.RetrieveDestroyAPIView):
-#     serializer_class = DocSerializer
-
-#     def get_queryset(self):
-        
-#         queryset = Doctor.objects.all()
-#         docid = self.kwargs['pk']
-#         if docid is not None:
-#             queryset = queryset.filter(user_id=docid)
-   
-#         return queryset  
-
 
 class DoctorView(APIView):
     def get_doc(self, docid):
@@ -133,4 +121,39 @@ class DoctorView(APIView):
     def delete(self, request, docid, format=None):
         doctor = self.get_doc(docid)
         doctor.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)             
+        return Response(status=status.HTTP_204_NO_CONTENT)  
+
+
+
+
+class PatientListView(generics.ListAPIView):
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+
+
+class PatientView(APIView):
+    def get_pat(self, patid):
+        try:
+            return Patient.objects.get(user_id=patid)
+        except Patient.DoesNotExist:
+            return Http404
+
+    def get(self, request, patid, format=None):
+        patient = self.get_pat(patid)
+        serializers = PatientSerializer(patient)
+        return Response(serializers.data) 
+
+
+    def put(self, request, patid, format=None):
+        patient = self.get_pat(patid)
+        serializer = PatientSerializer(patient, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+    def delete(self, request, patid, format=None):
+        patient = self.get_pat(patid)
+        patient.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)  
+

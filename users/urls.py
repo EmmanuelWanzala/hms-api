@@ -11,6 +11,8 @@ urlpatterns = [
       path('api/login', UserLoginView.as_view(), name='login'),
       path('api/doctors', DoctorListView.as_view(), name='doctors'),
       path('api/doctor/<int:docid>',DoctorView.as_view()),
+      path('api/patients', PatientListView.as_view(), name='patients'),
+      path('api/patient/<int:patid>',PatientView.as_view()),
 ]
 
 

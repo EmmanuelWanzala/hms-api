@@ -1,6 +1,6 @@
 from rest_framework import  serializers
 from django.db import models
-from .models import CustomUser as User,Doctor
+from .models import CustomUser as User,Doctor,Patient
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
@@ -22,6 +22,15 @@ class DocSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         fields = '__all__'
+
+
+# Patient serializer
+class PatientSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True, many=False)
+    class Meta:
+        model = Patient
+        fields = '__all__'
+
 
 
 
