@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from rest_framework.views import APIView
 from django.shortcuts import render,redirect,reverse
 from rest_framework import generics, permissions, mixins,status
@@ -8,8 +8,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .token_generator import account_activation_token
-from .serializer import UserRegistrationSerializer,UserLoginSerializer
-from .models import CustomUser as User
+from .serializer import *
+from .models import CustomUser as User,Doctor,Patient
 from hms.settings import UIDOMAIN
 
 #Register API
@@ -86,4 +86,51 @@ class UserLoginView(APIView):
                 }
             }
 
-            return Response(response, status=status_code)        
+            return Response(response, status=status_code)  
+
+
+
+
+
+class DoctorListView(generics.ListAPIView):
+    queryset = Doctor.objects.all()
+    serializer_class = DocSerializer
+
+# class DoctorView(generics.RetrieveDestroyAPIView):
+#     serializer_class = DocSerializer
+
+#     def get_queryset(self):
+        
+#         queryset = Doctor.objects.all()
+#         docid = self.kwargs['pk']
+#         if docid is not None:
+#             queryset = queryset.filter(user_id=docid)
+   
+#         return queryset  
+
+
+class DoctorView(APIView):
+    def get_doc(self, docid):
+        try:
+            return Doctor.objects.get(user_id=docid)
+        except Doctor.DoesNotExist:
+            return Http404
+
+    def get(self, request, docid, format=None):
+        doctor = self.get_doc(docid)
+        serializers = DocSerializer(doctor)
+        return Response(serializers.data) 
+
+
+    def put(self, request, docid, format=None):
+        doctor = self.get_doc(docid)
+        serializer = DocSerializer(doctor, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+    def delete(self, request, docid, format=None):
+        doctor = self.get_doc(docid)
+        doctor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)             

@@ -1,11 +1,29 @@
 from rest_framework import  serializers
 from django.db import models
-from .models import CustomUser as User
+from .models import CustomUser as User,Doctor
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import update_last_login
 from rest_framework.exceptions import AuthenticationFailed
+
+
+
+# User serializer
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id','first_name', 'last_name','role', 'email') 
+
+
+# Doctor serializer
+class DocSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True, many=False)
+    class Meta:
+        model = Doctor
+        fields = '__all__'
+
+
 
 # Register serializer
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -41,7 +59,7 @@ class UserLoginSerializer(serializers.Serializer):
         user = authenticate(email=email, password=password)
 
         if user is None:
-            raise serializers.ValidationError("Invalid login credentials")
+            raise AuthenticationFailed("Invalid login credentials")
         if not user.is_verified:
             raise AuthenticationFailed('Email Not Verified')    
 

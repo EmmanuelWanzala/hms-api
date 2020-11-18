@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
-from .api import RegisterApi,activate_account,UserLoginView
+from .api import *
 
 urlpatterns = [
       path('api/token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
@@ -9,6 +9,8 @@ urlpatterns = [
       path('api/register', RegisterApi.as_view()),
       path('api/activate/<uidb64>/<token>',activate_account, name='activate'),
       path('api/login', UserLoginView.as_view(), name='login'),
+      path('api/doctors', DoctorListView.as_view(), name='doctors'),
+      path('api/doctor/<int:docid>',DoctorView.as_view()),
 ]
 
 
