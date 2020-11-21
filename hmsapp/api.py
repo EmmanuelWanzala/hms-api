@@ -119,34 +119,21 @@ class PatientBillList(generics.ListAPIView):
    
         return queryset  
 
-class MedicationCreateApi(generics.CreateAPIView):
+class MedicationLCApi(generics.ListCreateAPIView):
     queryset=Medication.objects.all()
     serializer_class=MedicationSerializer
 
-class MedicationApi(generics.ListAPIView):
+class MedicationApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Medication.objects.all()
     serializer_class=MedicationSerializer
 
-class MedicationUpdateApi(generics.RetrieveAPIView):
-    queryset=Medication.objects.all()
-    serializer_class=MedicationSerializer
 
-class MedicationDeleteApi(generics.DestroyAPIView):
-    queryset=Medication.objects.all()
-    serializer_class=MedicationSerializer
-
-class ServiceCreateApi(generics.CreateAPIView):
+class ServiceLCApi(generics.ListCreateAPIView):
     queryset=Service.objects.all()
     serializer_class=ServiceSerializer
 
-class ServiceApi(generics.ListAPIView):
+class ServiceApi(generics.RetrieveUpdateDestroyAPIView):
     queryset=Service.objects.all()
     serializer_class=ServiceSerializer
 
-class ServiceUpdateApi(generics.RetrieveAPIView):
-    queryset=Service.objects.all()
-    serializer_class=ServiceSerializer
 
-class ServiceDeleteApi(generics.DestroyAPIView):
-    queryset=Service.objects.all()
-    serializer_class=ServiceSerializer
