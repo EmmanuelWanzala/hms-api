@@ -8,9 +8,23 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','first_name', 'last_name','role', 'email')   
 
+
+class MedicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =Medication
+        fields='__all__' 
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Service
+        fields='__all__'
+        
+
 class CaseListSerializer(serializers.ModelSerializer):
     patient = UserSerializer(read_only=True, many=False)
     doctor = UserSerializer(read_only=True, many=False)
+    medication = MedicationSerializer(read_only=True, many=False)
+    service = ServiceSerializer(read_only=True, many=False)
     class Meta:
         model = Case
         fields = '__all__'
@@ -42,15 +56,7 @@ class BillListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bill
         fields = '__all__'                      
-class MedicationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model =Medication
-        fields='__all__' 
 
-class ServiceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=Service
-        fields='__all__'
 
 
 
