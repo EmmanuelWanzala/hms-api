@@ -12,6 +12,7 @@ from .serializer import *
 from .models import CustomUser as User,Doctor,Patient
 from hms.settings import UIDOMAIN
 
+
 #Register API
 class RegisterApi(generics.GenericAPIView):
     serializer_class = UserRegistrationSerializer
@@ -156,4 +157,7 @@ class PatientView(APIView):
         patient = self.get_pat(patid)
         patient.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)  
+
+
+
 

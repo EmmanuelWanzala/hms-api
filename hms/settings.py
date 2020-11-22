@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config,Csv
 import os
 from datetime import timedelta
+import cloudinary
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,8 +47,17 @@ INSTALLED_APPS = [
     'hmsapp.apps.HmsappConfig',
     'rest_framework',
     'users',
-    'corsheaders'
+    'corsheaders',
+    'cloudinary', 
 ]
+
+
+cloudinary.config(
+  cloud_name = config('CLOUD_NAME'),
+  api_key = config('API_KEY'),
+  api_secret = config('API_SECRET'),
+  secure = True
+)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
