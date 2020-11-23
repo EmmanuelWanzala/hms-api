@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users',
     'corsheaders',
     'cloudinary', 
+    'mpesa_api.apps.MpesaApiConfig',
 ]
 
 
