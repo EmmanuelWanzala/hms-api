@@ -32,7 +32,7 @@ def lipa_na_mpesa_online(request):
         "PartyA": 254705075111,  # replace with your phone number to get stk push
         "PartyB": LipanaMpesaPpassword.Business_short_code,
         "PhoneNumber": 254705075111,  # replace with your phone number to get stk push
-        "CallBackURL": "https://aa2a6c2cd168.ngrok.io/payment/c2b/confirmation",
+        "CallBackURL": "http://d2e62f9971df.ngrok.io/payment/c2b/confirmation",
         "AccountReference": "Dennis",
         "TransactionDesc": "Testing stk push",
         'bill':23
@@ -50,8 +50,8 @@ def register_urls(request):
     headers = {"Authorization": "Bearer %s" % access_token}
     options = {"ShortCode": LipanaMpesaPpassword.Test_c2b_shortcode,
                "ResponseType": "Completed",
-               "ConfirmationURL": "https://localhost/payment/c2b/confirmation",
-               "ValidationURL": "https://localhost/payment/c2b/validation"}
+               "ConfirmationURL": "http://d2e62f9971df.ngrok.io/payment/c2b/confirmation",
+               "ValidationURL": "http://d2e62f9971df.ngrok.io/c2b/validation"}
     response = requests.post(api_url, json=options, headers=headers)
     return HttpResponse(response.text)
 @csrf_exempt
