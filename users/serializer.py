@@ -13,7 +13,7 @@ from rest_framework.exceptions import AuthenticationFailed
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','first_name', 'last_name','role', 'email') 
+        fields = ('id','first_name', 'last_name','role','address','mobile', 'email') 
 
 
 # Doctor serializer
