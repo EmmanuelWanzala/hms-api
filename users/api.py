@@ -11,6 +11,9 @@ from .token_generator import account_activation_token
 from .serializer import *
 from .models import CustomUser as User,Doctor,Patient
 from hms.settings import UIDOMAIN
+from rest_framework.parsers import MultiPartParser, JSONParser
+
+import cloudinary.uploader
 
 #Register API
 class RegisterApi(generics.GenericAPIView):
@@ -156,4 +159,26 @@ class PatientView(APIView):
         patient = self.get_pat(patid)
         patient.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)  
+
+
+
+class UploadView(APIView):
+    parser_classes = (
+        MultiPartParser,
+        JSONParser,
+    )
+
+    @staticmethod
+    def post(request):
+
+        file = request.data.get('file')
+
+        upload_data = cloudinary.uploader.upload(file, transformation=[
+          {'width': 144, 'height': 144, 'gravity': "face", 'radius': "max", 'crop': "crop"},
+          {'width': 144, 'crop': "scale"}
+        ])
+        return Response({
+            'status': 'ok',
+            'data': upload_data,
+        }, status=201)
 

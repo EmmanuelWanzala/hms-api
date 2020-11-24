@@ -47,6 +47,7 @@ departments=[('Consultant','Consultant'),
 ]
 class Doctor(models.Model):
     user=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
+    profile_pic= models.CharField(max_length=255,blank=True, null=True)
     department= models.CharField(max_length=50,choices=departments,default='Consultant')
  
     def __str__(self):
@@ -55,7 +56,8 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    age = models.PositiveIntegerField(null=True,blank=True)
+    profile_pic= models.CharField(max_length=255,null=True,blank=True,default="https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png")
+    dob = models.DateField(null=True,blank=True)
     blood_group = models.CharField(max_length=3,null=True,blank=True)
 
     def __str__(self):

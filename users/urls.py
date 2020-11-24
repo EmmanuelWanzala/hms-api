@@ -13,6 +13,7 @@ urlpatterns = [
       path('api/doctor/<int:docid>',DoctorView.as_view()),
       path('api/patients', PatientListView.as_view(), name='patients'),
       path('api/patient/<int:patid>',PatientView.as_view()),
+      path('api/upload-profile', UploadView.as_view()),
 ]
 
 
