@@ -61,5 +61,5 @@ class Patient(models.Model):
     blood_group = models.CharField(max_length=3,null=True,blank=True)
 
     def __str__(self):
-        return "{} ({}:{})".format(self.user.first_name,self.user.get_role_display(),self.age)
+        return "{} ({})".format(self.user.first_name,self.user.get_role_display())
 
