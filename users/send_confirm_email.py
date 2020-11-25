@@ -13,13 +13,9 @@ from sendgrid.helpers.mail import Mail
 
 
 
-
-
-
-
 def send_confirmation_email(user):
-
-    # locates our email.html in the templates folder
+    
+       # locates our email.html in the templates folder
     msg_html = render_to_string('activate_account.html',{
         'user': user,
         'domain': DOMAIN,
@@ -36,8 +32,9 @@ def send_confirmation_email(user):
         sg = SendGridAPIClient(SENDGRID_API_KEY)
         response = sg.send(message)
         print(response.status_code)
+       
     except Exception as e:
-        print(e.message)
+        
         return str(e)
 
 
