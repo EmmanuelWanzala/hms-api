@@ -23,6 +23,13 @@ SENDGRID_API_KEY =config('SENDGRID_KEY')
 DOMAIN= config('DOMAIN')
 
 UIDOMAIN= config('UIDOMAIN')
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER =config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
