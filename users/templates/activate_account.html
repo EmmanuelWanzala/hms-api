@@ -29,7 +29,7 @@
         <div class="card-body">
             <p class="card-text text-center"><strong>Thank you for creating an account.Please verify your email address to activate your account.</strong></p>
             <p class="text-center">{{ user.first_name }} {{ user.last_name }}</p>
-            <a class="text-center verify-button" href=" {{ domain }}{% url 'activate' uidb64=uid token=token %}">
+            <a class="text-center verify-button"  clicktracking=off href="https://medman-hms.herokuapp.com{% url 'activate' uidb64=uid token=token %}">
                 <button type="button" class="btn">Activate Account</button>
             </a>
         </div>
