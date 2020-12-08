@@ -22,8 +22,8 @@ urlpatterns = [
     path('api/medication',MedicationLCApi.as_view()),
     path('api/medication/<int:pk>',MedicationApi.as_view()),
   
-    path('api/service',ServiceLCApi.as_view()),
-    path('api/service/<int:pk>',ServiceApi.as_view()),
+    path('api/service',ServiceLCApi.as_view(),name='service_create'),
+    path('api/service/<int:pk>',ServiceApi.as_view(),name='service_update'),
     
 
 ]
