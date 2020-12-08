@@ -1,4 +1,5 @@
 asgiref==3.3.1
+attrs==20.3.0
 certifi==2020.11.8
 chardet==3.0.4
 cloudinary==1.23.0
@@ -8,11 +9,17 @@ django-cors-headers==3.5.0
 django-heroku==0.3.1
 django-sslserver==0.22
 djangorestframework==3.12.2
-djangorestframework-simplejwt==4.4.0
+djangorestframework-simplejwt==4.6.0
 idna==2.10
-gunicorn==20.0.4
+iniconfig==1.1.1
+packaging==20.7
+pluggy==0.13.1
 psycopg2==2.8.6
+py==1.9.0
 PyJWT==1.7.1
+pyparsing==2.4.7
+pytest==6.1.2
+pytest-django==4.1.0
 python-decouple==3.3
 python-http-client==3.3.1
 pytz==2020.4
@@ -22,5 +29,6 @@ sendgrid-python==0.1.1
 six==1.15.0
 sqlparse==0.4.1
 starkbank-ecdsa==1.1.0
+toml==0.10.2
 urllib3==1.26.2
 whitenoise==5.2.0
